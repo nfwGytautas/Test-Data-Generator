@@ -186,12 +186,13 @@ class DataFormat:
         for i in range(0, count):
             path = dir + "/" + name + str(i) + '.txt'
 
-            with open(path, "w") as text_file:
-                print(self.output(), file=text_file)
+            text_file = open(path, "w")
+            text_file.write(self.output())
+            text_file.close()
         
 
 def entry():
-    fmt = DataFormat(15)
+    fmt = DataFormat(200)
 
     #Date
     fmt.add_command(DateField())
@@ -206,6 +207,15 @@ def entry():
     fmt.add_command(NumField(0, 255, int))
 
     fmt.add_command(StrField())
+    fmt.add_command(NumField(0, 420, int))
+
+    fmt.add_command(StrField())
+    fmt.add_command(StrField())
+
+    fmt.add_command(NumField(16, 30, int))
+    fmt.add_command(NumField(0, 64, int))
+
+    fmt.add_command(StrField())
 
     #Path
     #fmt.add_command(TextField("localhost:"), '/')
@@ -213,7 +223,7 @@ def entry():
     #fmt.add_command(StrField(), '/')
     #fmt.add_command(StrField())
 
-    fmt.gen_to_files('GeneratedFiles', 1)
+    fmt.gen_to_files('GeneratedFiles', 10)
 
 
 #Python main func
